@@ -1,43 +1,15 @@
-# package.json Notes
+# AWS Deployment Test
 
-## For React Applications
+Deploy a simple Node.js server to EC2, using Elastic Beanstalk
 
-To deploy your application at GitHub pages, you'll need to add a home page property to your package.json which points to the deployed base URL of your GitHub Pages site.
+## Task 1
 
-*NOTE: This will break deployments to other hosting services such as Netlify, Vercel, or AWS Amplify, so if you later wish to deploy there, remove this property completely.*
+Create a new environment, using Elastic Beanstalk from the AWS Control Panel (GUI)\
+Manually deploy your application to this environment by uploading a .zip file
+[http://rightclicktest-env.eba-ruvhy2uf.us-east-2.elasticbeanstalk.com/](http://rightclicktest-env.eba-ruvhy2uf.us-east-2.elasticbeanstalk.com/)
 
-```json
-{
-  "homepage": "https://yourname.github.io/repository-name"
-}
-```
+## Task 2
 
-## Node / Express Applications
-
-### For Tests
-
-Your scripts section should have the following, so that you can easily run tests locally and in your CI.
-
-```json
-  "scripts": {
-    "start": "node index.js",
-    "test": "jest --verbose --coverage",
-    "test-watch": "jest --watchAll --verbose --coverage",
-    "init:config": "sequelize init:config",
-    "db:create": "sequelize db:create"
-},
-```
-
-### For NPM Modules
-
-If you are creating a module to deploy at NPM, you'll want a "bin" section that identifies the name of the global command to run and your .js file that runs when called.
-
-```json
-"bin": {
-    "fetch": "index.js"
-}
-```
-
-Additionally, that file should have as it's first line, so that it'll run without having to type "node filename.js" every time
-
-`#!/usr/bin/env node`
+Using the same server, create a new environment using Elastic Beanstalk from your terminal\
+Manually deploy your application to this environment by using eb deploy
+[http://server-ec2-practice2-dev.us-east-2.elasticbeanstalk.com/](http://server-ec2-practice2-dev.us-east-2.elasticbeanstalk.com/)
