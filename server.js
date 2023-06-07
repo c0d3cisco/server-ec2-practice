@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3002;
 
 app.get('/', (req, res, next) => res.status(200).send('Hello World!'));
 app.get('/other-secret', (req, res, next) => res.status(200).send(`The password is the opposite of ${req.query.password}`));
+app.get('/next', (req, res, next) => res.status(200).send(`The Other Test`));
+app.get('/other-next', (req, res, next) => res.status(200).send(`The Other Other Test`));
 app.get('/secret', (req, res, next) => res.status(200).send(`The password is ${req.query.password}`));
 
 app.listen(PORT, () => console.log('Server started on port', PORT));

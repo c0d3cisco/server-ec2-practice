@@ -1,0 +1,45 @@
+branch-defaults:
+  main:
+    environment: server-ec2-practice3-dev
+    group_suffix: null
+global:
+  application_name: server-ec2-practice3
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Node.js 18 running on 64bit Amazon Linux 2
+  default_region: us-east-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: git
+  workspace_type: Application
+name: Deploy master
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: server-ec2-practice3
+        environment_name: server-ec2-practice3-dev4
+        version_label: 12345
+        region: us-east-2
+        deployment_package: deploy.zip
